@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Копирайтер и редактор Борис Очкивский | Автор текстов на заказ</title>
+    <meta name="description" content="Услуги профессионального копирайтера и редактора. Написание статей, постов, лендингов, SEO-текстов. Опыт 10+ лет. Работа по всей РФ.">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS ОБНУЛЕНИЕ И ПЕРЕМЕННЫЕ --- */
+        :root {
+            --bg-color: #FCFBF7;
+            --text-main: #2C2C2C;
+            --text-light: #555555;
+            --accent-gold: #D4AF37;
+            --card-bg: #FFFFFF;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Merriweather', serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+        h1, h2, h3, h4, .nav-links, button { font-family: 'Manrope', sans-serif; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* --- ХЕДЕР --- */
+        header { background: var(--bg-color); padding: 20px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        
+        /* Обновленный логотип с аватаркой */
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            font-size: 24px; 
+            font-weight: 700; 
+            letter-spacing: 1px; 
+        }
+        .avatar-img { 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 2px solid var(--accent-gold); 
+        }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { font-weight: 600; font-size: 15px; color: var(--text-main); transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent-gold); }
+        .btn-accent { background: var(--accent-gold); color: #fff; padding: 10px 25px; border-radius: 30px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; font-family: 'Manrope', sans-serif; }
+        .btn-accent:hover { background: #b8941c; transform: translateY(-2px); }
+        
+        .burger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .burger span { display: block; width: 25px; height: 3px; background: var(--text-main); border-radius: 2px; transition: 0.3s; }
+        #burger-toggle { display: none; }
+        #burger-toggle:checked ~ .nav-links { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background: var(--bg-color); padding: 20px; box-shadow: var(--shadow); }
+
+        /* --- БАННЕР (КАК НА КВОРК) --- */
+        .hero-banner { width: 100%; display: block; margin-bottom: 20px; }
+        .hero-banner img { width: 100%; height: auto; max-height: 600px; object-fit: cover; display: block; }
+
+        /* --- ПОД БАННЕРОМ (Обо мне) --- */
+        .about { padding: 60px 0 40px; }
+        .about-inner { display: flex; align-items: center; gap: 60px; background: var(--card-bg); padding: 40px; border-radius: 30px; box-shadow: var(--shadow); }
+        .about-img { flex: 0 0 300px; }
+        .about-img img { width: 100%; aspect-ratio: 1/1; border-radius: 50%; object-fit: cover; border: 5px solid var(--accent-gold); }
+        .about-text { flex: 1; }
+        .about-text h2 { font-size: 2rem; margin-bottom: 20px; }
+        .about-text p { color: var(--text-light); margin-bottom: 15px; }
+
+        /* --- УСЛУГИ --- */
+        .services { padding: 80px 0; text-align: center; }
+        .services h2 { font-size: 2.2rem; margin-bottom: 40px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+        .service-card { background: var(--card-bg); padding: 30px; border-radius: 20px; box-shadow: var(--shadow); text-align: left; transition: 0.3s; }
+        .service-card:hover { transform: translateY(-5px); }
+        .service-icon { font-size: 2rem; margin-bottom: 15px; color: var(--accent-gold); }
+        .service-card h4 { margin-bottom: 10px; }
+        .service-card p { font-size: 0.9rem; color: var(--text-light); font-family: 'Merriweather', serif; }
+
+        /* --- НАВЫКИ (ПРОГРЕСС-БАРЫ) --- */
+        .skills { padding: 80px 0; background: var(--card-bg); }
+        .skills h2 { text-align: center; font-size: 2.2rem; margin-bottom: 40px; }
+        .skills-wrapper { max-width: 800px; margin: 0 auto; }
+        .skill-group { margin-bottom: 30px; }
+        .skill-group h3 { font-size: 1.2rem; margin-bottom: 15px; border-bottom: 2px solid var(--bg-color); padding-bottom: 10px; }
+        .skill-row { margin-bottom: 15px; }
+        .skill-row span { display: flex; justify-content: space-between; font-family: 'Manrope', sans-serif; font-size: 0.95rem; margin-bottom: 5px; }
+        .progress-track { width: 100%; height: 8px; background: #e0e0e0; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent-gold); border-radius: 10px; }
+
+        /* --- ПОРТФОЛИО --- */
+        .portfolio { padding: 80px 0; }
+        .portfolio h2 { text-align: center; font-size: 2.2rem; margin-bottom: 40px; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .portfolio-card { background: var(--card-bg); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+        
+        /* Исправление для картинок портфолио (масштабирование без обрезки) */
+        .portfolio-card img { 
+            width: 100%; 
+            height: auto; 
+            aspect-ratio: 16 / 9; 
+            object-fit: contain; 
+            background-color: var(--card-bg); 
+            display: block; 
+        }
+
+        .portfolio-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .portfolio-body h4 { margin-bottom: 10px; }
+        .portfolio-quote { font-style: italic; color: var(--text-light); font-size: 0.95rem; margin-bottom: 20px; padding-left: 10px; border-left: 3px solid var(--accent-gold); }
+        .portfolio-btn { margin-top: auto; align-self: flex-start; background: transparent; border: 2px solid var(--accent-gold); color: var(--text-main); padding: 8px 20px; border-radius: 30px; font-weight: 600; font-family: 'Manrope', sans-serif; transition: 0.3s; cursor: pointer;}
+        .portfolio-btn:hover { background: var(--accent-gold); color: #fff; }
+        .portfolio-btn a { display: block; width: 100%; height: 100%; }
+
+        /* --- КОНТАКТЫ --- */
+        .contact { padding: 80px 0; text-align: center; }
+        .contact h2 { font-size: 2.2rem; margin-bottom: 10px; }
+        .contact p { color: var(--text-light); margin-bottom: 40px; }
+        .contact-wrapper { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; background: var(--card-bg); padding: 40px; border-radius: 30px; box-shadow: var(--shadow); max-width: 900px; margin: 0 auto; }
+        .contact-info { text-align: left; flex: 1; min-width: 250px; }
+        .contact-info h4 { margin-bottom: 15px; }
+        .contact-info p { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .social-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .social-btn { display: inline-flex; align-items: center; gap: 8px; background: #f1f1f1; padding: 8px 15px; border-radius: 20px; font-weight: 600; font-family: 'Manrope', sans-serif; font-size: 0.9rem; transition: 0.3s; border: 1px solid transparent; }
+        .social-btn:hover { background: var(--accent-gold); color: #fff; border-color: var(--accent-gold); }
+        
+        .contact-form { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 15px; text-align: left; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 10px; background: #f9f9f9; font-family: 'Merriweather', serif; }
+        .contact-form textarea { height: 100px; resize: vertical; }
+        .contact-form button { width: 100%; padding: 12px; margin-top: 10px; }
+        .form-agreement { font-size: 0.8rem; color: var(--text-light); margin-top: -5px; }
+        .form-agreement input { width: auto; margin-right: 5px; }
+
+        /* --- ФУТЕР --- */
+        footer { text-align: center; padding: 40px 0; border-top: 1px solid #eee; color: var(--text-light); font-size: 0.9rem; }
+
+        /* --- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ --- */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); }
+        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 30px; border: 1px solid #888; width: 90%; max-width: 800px; border-radius: 15px; position: relative; max-height: 80vh; overflow-y: auto; }
+        .close-modal { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close-modal:hover, .close-modal:focus { color: black; text-decoration: none; cursor: pointer; }
+
+        /* --- АДАПТИВНОСТЬ --- */
+        @media (max-width: 768px) {
+            .burger { display: flex; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background: var(--bg-color); padding: 20px; box-shadow: var(--shadow); border-bottom: 1px solid #eee; }
+            #burger-toggle:checked ~ .nav-links { display: flex; }
+            .about-inner { flex-direction: column; text-align: center; }
+            .about-img { flex: 0 0 200px; }
+            .about-img img { max-width: 200px; }
+            .contact-wrapper { flex-direction: column; }
+            .contact-info { text-align: center; }
+            .contact-info p { justify-content: center; }
+            .social-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <!-- Добавлена аватарка рядом с именем -->
+            <div class="logo">
+                <img src="assets/img/img-01.jpg" alt="Борис Очкивский" class="avatar-img">
+                Борис Очкивский
+            </div>
+            <input type="checkbox" id="burger-toggle">
+            <label for="burger-toggle" class="burger">
+                <span></span><span></span><span></span>
+            </label>
+            <nav class="nav-links">
+                <a href="#services">Услуги</a>
+                <a href="#portfolio">Портфолио</a>
+                <a href="#contact" class="btn-accent">Связаться</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ЗАСТАВКА (КАК НА КВОРК) -->
+        <div class="hero-banner">
+            <!-- Резервируем место для баннера img-00-banner.jpg -->
+            <img src="assets/img/img-00-banner.jpg" alt="Борис Очкивский - Копирайтер, редактор, автор текстов">
+        </div>
+
+        <!-- ОБО МНЕ (ЖИВОЙ БЛОК) -->
+        <section class="about container" id="about">
+            <div class="about-inner">
+                <div class="about-img">
+                    <img src="assets/img/img-02.jpg" alt="Борис Очкивский">
+                </div>
+                <div class="about-text">
+                    <h2>Обо мне</h2>
+                    <p>Мне 38 лет, я живу в Орле. Мое уникальное преимущество — сочетание технического склада ума (инженер-радиоэлектронщик), психологического образования и многолетнего опыта в текстах. Это позволяет мне глубоко погружаться в любую тему: от IT-разработок до духовных практик и бизнес-стратегий.</p>
+                    <p>Я не просто "переписываю" задачи — я перевожу сложный язык на понятный клиенту, делая текст живым, структурированным и продающим.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- УСЛУГИ -->
+        <section class="services container" id="services">
+            <h2>Мои услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">✍️</div>
+                    <h4>Копирайтинг</h4>
+                    <p>Статьи, посты, лендинги, сценарии. Создаю тексты под любую задачу.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📝</div>
+                    <h4>Редактура и корректура</h4>
+                    <p>Глубокий разбор материалов, улучшение стилистики, исправление ошибок.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h4>SEO-оптимизация</h4>
+                    <p>Адаптация контента под поисковые запросы Яндекса и Google.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h4>Визуальное сопровождение</h4>
+                    <p>Подбор иллюстраций, инфографика, работа с фотостоками.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h4>Работа с нейросетями</h4>
+                    <p>Создание промптов (ChatGPT, GigaChat) и доработка контента до идеала.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- НАВЫКИ -->
+        <section class="skills container" id="skills">
+            <h2>Навыки и инструменты</h2>
+            <div class="skills-wrapper">
+                <div class="skill-group">
+                    <h3>Продвинутый уровень</h3>
+                    <div class="skill-row"><span>Копирайтинг, Редактура <b>100%</b></span><div class="progress-track"><div class="progress-fill" style="width: 100%;"></div></div></div>
+                    <div class="skill-row"><span>Корректура, Посты для соцсетей <b>95%</b></span><div class="progress-track"><div class="progress-fill" style="width: 95%;"></div></div></div>
+                </div>
+                <div class="skill-group">
+                    <h3>Средний уровень</h3>
+                    <div class="skill-row"><span>SEO-тексты, Аналитика <b>70%</b></span><div class="progress-track"><div class="progress-fill" style="width: 70%;"></div></div></div>
+                    <div class="skill-row"><span>Подбор иллюстраций, Тексты о саморазвитии <b>65%</b></span><div class="progress-track"><div class="progress-fill" style="width: 65%;"></div></div></div>
+                </div>
+                <div class="skill-group">
+                    <h3>Инструменты</h3>
+                    <div class="skill-row"><span>ChatGPT, YandexGPT, GigaChat <b>90%</b></span><div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div></div>
+                    <div class="skill-row"><span>Cursor, Фотостоки <b>80%</b></span><div class="progress-track"><div class="progress-fill" style="width: 80%;"></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ПОРТФОЛИО -->
+        <section class="portfolio container" id="portfolio">
+            <h2>Портфолио</h2>
+            <div class="portfolio-grid">
+                <!-- Кейс 1 -->
+                <div class="portfolio-card">
+                    <img src="assets/img/img-03.jpg" alt="Кейс Увеличение продаж">
+                    <div class="portfolio-body">
+                        <h4>Как чат-бот увеличил продажи на 35%</h4>
+                        <div class="portfolio-quote">«Продажи выросли на 35% за 30 дней без увеличения трафика»</div>
+                        <button class="portfolio-btn"><a href="https://vk.com/@1075839227-kak-chat-bot-uvelichil-prodazhi-onlain-shkoly-na-35-za-mesy" target="_blank" rel="noopener">Читать кейс →</a></button>
+                    </div>
+                </div>
+                <!-- Кейс 2 -->
+                <div class="portfolio-card">
+                    <img src="assets/img/img-04.jpg" alt="Кейс Свадебный торт">
+                    <div class="portfolio-body">
+                        <h4>Свадебный торт на ДР. Как ИИ не угробил бизнес</h4>
+                        <div class="portfolio-quote">«История стала вирусной и принесла бизнесу новых клиентов»</div>
+                        <button class="portfolio-btn"><a href="https://vk.com/@1075839227-svadebnyi-tort-na-den-rozhdeniya-kak-chat-bot-chut-ne-ugrob" target="_blank" rel="noopener">Читать кейс →</a></button>
+                    </div>
+                </div>
+                <!-- Кейс 3 (Обновлен) -->
+                <div class="portfolio-card">
+                    <img src="assets/img/img-05.jpg" alt="Кейс Православный AI">
+                    <div class="portfolio-body">
+                        <h4>AI-ассистент православного психолога</h4>
+                        <div class="portfolio-quote">«Большинство оценок — 5 из 5. Отзывы: "Всё в самую сердцевину"»</div>
+                        <button class="portfolio-btn"><a href="https://vk.com/@1075839227-pravoslavnyi-psihologicheskii-ai-assistent-kak-byl-sozdan-bo" target="_blank" rel="noopener">Читать кейс →</a></button>
+                    </div>
+                </div>
+                <!-- Кейс 4 -->
+                <div class="portfolio-card">
+                    <img src="assets/img/img-06.jpg" alt="Кейс Художественная проза">
+                    <div class="portfolio-body">
+                        <h4>Рассказ «Когда гром уже грянул»</h4>
+                        <div class="portfolio-quote">«Демонстрация глубокого художественного стиля и живых персонажей»</div>
+                        <button class="portfolio-btn"><a href="https://vk.com/@borisochkivskii-kogda-grom-uzhe-gryanul" target="_blank" rel="noopener">Прочитать рассказ →</a></button>
+                    </div>
+                </div>
+                <!-- Кейс 5 (НОВЫЙ) -->
+                <div class="portfolio-card">
+                    <img src="assets/img/img-07.jpg" alt="Кейс Интерактивный тест для бизнеса">
+                    <div class="portfolio-body">
+                        <h4>📢 Интерактивный тест для бизнеса</h4>
+                        <div class="portfolio-quote">«Вовлекающий формат, повышающий конверсию заявок»</div>
+                        <button class="portfolio-btn"><a href="https://t.me/UmnyePomoshniki/13" target="_blank" rel="noopener">Посмотреть тест →</a></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- КОНТАКТЫ -->
+        <section class="contact container" id="contact">
+            <h2>Давайте работать вместе</h2>
+            <p>Напишите мне — я предложу решение для вашей задачи</p>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h4>Контакты</h4>
+                    <p>📞 <b>+7 919 260-64-42</b></p>
+                    <p>✉️ <b>o.evtihiy@mail.ru</b></p>
+                    <p>📍 Орел, Россия</p>
+                    <br>
+                    <h4>Мои профили</h4>
+                    <div class="social-links">
+                        <a href="https://vk.com/borisochkivskii" target="_blank" class="social-btn">VK</a>
+                        <a href="https://t.me/o_Evtihiy" target="_blank" class="social-btn">Telegram</a>
+                        <a href="https://max.ru/u/f9LHodD0cOIhM9hqE8zxlGBQFs9H44pN3BDm7nIClw4ZExgAIY54XivoZsU" target="_blank" class="social-btn">MAX</a>
+                    </div>
+                </div>
+                
+                <!-- Настраиваем отправку писем на почту -->
+                <form class="contact-form" action="mailto:o.evtihiy@mail.ru" method="post" enctype="text/plain">
+                    <input type="text" name="name" placeholder="Ваше имя" required>
+                    <input type="tel" name="phone" placeholder="Номер телефона" required>
+                    <textarea name="message" placeholder="Опишите задачу..."></textarea>
+                    <div class="form-agreement">
+                        <label>
+                            <input type="checkbox" required> Я согласен на <a href="#" id="open-privacy" style="color: var(--accent-gold); text-decoration: underline;">обработку персональных данных</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-accent">Отправить заявку</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Борис Очкивский. Все права защищены.</p>
+            <p><a href="#" id="open-privacy-footer" style="text-decoration: underline;">Политика конфиденциальности</a></p>
+        </div>
+    </footer>
+
+    <!-- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 style="font-family: 'Manrope', sans-serif; margin-bottom: 20px;">Политика конфиденциальности</h2>
+            <p>Настоящая Политика конфиденциальности регулирует порядок обработки и защиты персональных данных пользователей сайта (далее – Пользователи).</p>
+            <br>
+            <p><strong>1. Какие данные собираются</strong><br>
+            При заполнении формы обратной связи на сайте, Пользователь предоставляет следующую информацию: имя, номер телефона, адрес электронной почты, текст сообщения.</p>
+            <br>
+            <p><strong>2. Цели сбора данных</strong><br>
+            Персональные данные собираются исключительно для связи с Пользователем, обработки его заявки, предоставления консультации по услугам, а также для направления коммерческих предложений (только с согласия Пользователя).</p>
+            <br>
+            <p><strong>3. Обработка и хранение</strong><br>
+            Обработка данных осуществляется в строгом соответствии с Федеральным законом РФ «О персональных данных» № 152-ФЗ. Данные хранятся на защищенных серверах и не передаются третьим лицам, за исключением случаев, предусмотренных законом.</p>
+            <br>
+            <p><strong>4. Согласие Пользователя</strong><br>
+            Отправляя форму, Пользователь дает добровольное согласие на обработку указанных данных. Пользователь вправе отозвать свое согласие, направив письменное уведомление на электронную почту o.evtihiy@mail.ru.</p>
+            <br>
+            <p><strong>5. Срок действия</strong><br>
+            Данная политика действует бессрочно и может быть изменена без предварительного уведомления. Актуальная версия всегда находится на этом сайте.</p>
+        </div>
+    </div>
+
+    <!-- JS ДЛЯ МОДАЛКИ И ПЛАВНОГО СКРОЛЛА -->
+    <script>
+        // Скрипт для модального окна "Политика конфиденциальности"
+        const modal = document.getElementById("privacyModal");
+        const btns = document.querySelectorAll("#open-privacy, #open-privacy-footer");
+        const span = document.getElementsByClassName("close-modal")[0];
+
+        btns.forEach(btn => {
+            btn.onclick = function(e) {
+                e.preventDefault();
+                modal.style.display = "block";
+                document.body.style.overflow = "hidden"; // Блокировка скролла фона
+            }
+        });
+
+        span.onclick = function() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+
+        // Скрипт плавного скролла
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if(!this.id.includes('privacy')) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if(target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        document.getElementById('burger-toggle').checked = false;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
